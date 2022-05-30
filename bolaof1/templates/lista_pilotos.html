@@ -1,0 +1,50 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+{% if user.is_superuser %}
+
+<div class="mb-5" style="text-align: center;">
+  <div class="card card-header col-sm-18">
+      <h3 class="card-title">Lista de Pilotos</h3>
+      {% if piloto|length > 0 %}
+          <p class="card-text">Aqui está a lista de <code>Pilotos</code> cadastrados.</p>
+      <div class="table-responsive-sm">
+          <table class="table table-hover">
+              <thead class="thead-dark">
+                  <tr>
+                      <th>Nome</th>
+                      <th>Numero</th>
+                      <th>Equipe</th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+              </thead>
+              {% for item in piloto %}
+                <tr>
+                  <td>{{ item.nome }}</td>
+                  <td>{{ item.numero }}</td>
+                  <td>{{ item.equipe }}</td>
+                  <td>
+                    <a href="editar/{{ item.nome }}" class="btn btn-info">Atualizar</a>
+                    <a href="deletar/{{ item.nome }}" class="btn btn-outline-danger">Excluir</a>
+                  </td>
+                </tr>
+
+              {% endfor %}
+          </table>
+      </div>
+      {% else %}
+          <div class="text-center mt-5 mb-5 jumbotron">
+              <h3>Nenhum <code>Piloto</code> cadastrado ainda.</h3>
+          </div>
+      {% endif %}
+  </div>
+</div>
+<div style="text-align: center;">
+<a href="{% url 'cadastro_piloto' %}" class="btn btn-primary my-2 m-2 text-monospace" >VOLTAR</a>
+</div>
+{% else %}
+<h3 align="center"> Pagina restrita a administradores.</h3>
+{% endif %}
+{% endblock %}
+

@@ -1,0 +1,87 @@
+<meta charset="UTF-8">
+<title>Bolao F1 Egomar</title>
+
+<!--bootstrap-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+  <a class="navbar-brand" href="#">
+    <img src="{% static 'bolao/img/logo.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+    Bolao F1 do Ego
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#textoNavbar" aria-controls="textoNavbar" aria-expanded="false" aria-label="Alterna navegação">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="textoNavbar">
+    <ul class="navbar-nav mr-auto">
+        {% if user.is_superuser %}
+      <li class="nav-item">
+        <a class="nav-link" href="/index">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/regulamento">Regulamento</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'cadastro_piloto' %}">Pilotos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'cadastro_gp' %}">Corridas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'cadastro_apostas' %}">Apostas</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'cadastro_resultado' %}">Resultados F1</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'resultados_bolao' %}">Resultados Bolão</a>
+      </li>
+      {% elif user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="/index">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/regulamento">Regulamento</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'cadastro_apostas' %}">Apostas</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'lista_resultados_2' %}">Resultados F1</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'resultados_bolao' %}">Resultados Bolão</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+          <a class="nav-link" href="/index">Home</a>
+      </li>
+      <li class="nav-item ">
+           <a class="nav-link" href="/regulamento">Regulamento</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'resultados_bolao' %}">Resultados F1</a>
+      </li>
+      {% endif %}
+    </ul>
+    <span class="navbar-text">
+      {% if user.is_authenticated %}
+        <p align="right" class="font-weight-bold mr-3 mt-2 mb-0">Bem Vindo {{ user.username }}<a align="right" href="{% url 'logout'%}" class="ml-2 btn-sm mr-4 text-monospace">Logout</a></p>{% csrf_token %}
+      {% else %}
+        <p align="right" class="font-weight-bold mt-2 mb-0">Nao tem cadastro?<a align="right" href="{% url 'login'%}" class="btn-sm text-monospace">Cadastrar</a><a align="right" href="{% url 'login'%}" class="btn-sm text-monospace">Login</a></p>{% csrf_token %}
+      {% endif %}
+    </span>
+  </div>
+</nav>
+
+
+
+
+

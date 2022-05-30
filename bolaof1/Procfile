@@ -1,0 +1,1 @@
+web: gunicorn Bolaof1.wsgi

@@ -1,0 +1,70 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+
+<div class="mb-5" style="text-align: center;">
+  <div class="card card-header col-sm-18">
+      <h3 class="card-title">Apostas</h3>
+      {% if piloto|length > 0 %}
+          <p class="card-text">Aqui está a lista das suas <code>Apostas</code> cadastradas.</p>
+      <div class="table-responsive-sm">
+
+          <table class="table table-hover">
+              <thead class="thead-dark">
+                  <tr>
+                      <th>Apostador</th>
+                      <th>GP</th>
+                      <th>1º</th>
+                      <th>2º</th>
+                      <th>3º</th>
+                      <th>4º</th>
+                      <th>5º</th>
+                      <th>6º</th>
+                      <th>7º</th>
+                      <th>8º</th>
+                      <th>9º</th>
+                      <th>10º</th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+              </thead>
+              {% for item in piloto %}
+                <tr>
+                  <td>{{ item.usuario }}</td>
+                  <td>{{ item.gp }}</td>
+                  <td>{{ item.primeiro }}</td>
+                  <td>{{ item.segundo }}</td>
+                  <td>{{ item.terceiro }}</td>
+                  <td>{{ item.quarto }}</td>
+                  <td>{{ item.quinto }}</td>
+                  <td>{{ item.sexto }}</td>
+                  <td>{{ item.setimo }}</td>
+                  <td>{{ item.oitavo }}</td>
+                  <td>{{ item.nono }}</td>
+                  <td>{{ item.decimo }}</td>
+                  <td>
+                    <a href="editar/{{ item.id }}"  class="btn btn-info">Atualizar</a>
+                    <a href="deletar/{{ item.id }}" class="btn btn-outline-danger">Excluir</a>
+                  </td>
+                </tr>
+
+
+
+
+              {% endfor %}
+          </table>
+
+      </div>
+      {% else %}
+          <div class="text-center mt-5 mb-5 jumbotron">
+              <h3>Nenhuma <code>Aposta</code> cadastrada ainda.</h3>
+          </div>
+      {% endif %}
+  </div>
+</div>
+<div style="text-align: center;">
+<a href="{% url 'cadastro_apostas' %}" class="btn btn-primary my-2 m-2 text-monospace" >VOLTAR</a>
+</div>
+
+{% endblock %}
+

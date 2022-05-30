@@ -1,0 +1,95 @@
+{% extends "model-page.html" %}
+{% load bootstrap %}
+{% block content %}
+
+<div class="container row" style="text-align: center;">
+    <h2 class="container mb-5">Faça sua aposta</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-dark" role="alert">
+                    <h3{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h3>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+                <div class="form-group">
+                    {{ form.usuario.errors }}
+                    <p><label>Apostador: </label></p>
+                    {{ user.username }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.gp.errors }}
+                    <p><label>Grande Prêmio: </label></p>
+                    {{ form.gp }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.primeiro.errors }}
+                    <label>1º  </label>
+                    {{ form.primeiro }}
+                </div>
+
+                <div class="form-group">
+                    {{form.segundo.errors}}
+                    <label>2º  </label>
+                    {{form.segundo}}
+                </div>
+
+                <div class="form-group">
+                    {{form.terceiro.errors}}
+                    <label>3º  </label>
+                    {{form.terceiro}}
+                </div>
+
+                <div class="form-group">
+                    {{form.quarto.errors}}
+                    <label>4º  </label>
+                    {{form.quarto}}
+                </div>
+
+                <div class="form-group">
+                    {{form.quinto.errors}}
+                    <label>5º  </label>
+                    {{form.quinto}}
+                </div>
+
+                <div class="form-group">
+                    {{form.sexto.errors}}
+                    <label>6º  </label>
+                    {{form.sexto}}
+                </div>
+
+                <div class="form-group">
+                    {{form.setimo.errors}}
+                    <label>7º  </label>
+                    {{form.setimo}}
+                </div>
+
+                <div class="form-group">
+                    {{form.oitavo.errors}}
+                    <label>8º  </label>
+                    {{form.oitavo}}
+                </div>
+
+                <div class="form-group">
+                    {{form.nono.errors}}
+                    <label>9º  </label>
+                    {{form.nono}}
+                </div>
+
+                <div class="form-group">
+                    {{form.decimo.errors}}
+                    <label>10º  </label>
+                    {{form.decimo}}
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Cadastrar" class="btn btn-primary">
+                </div>
+            <a href="/lista_apostas" class="btn btn-primary my-2 m-2 mb-5 text-monospace" >Minhas apostas</a>
+        </form>
+
+</div>
+{% endblock %}

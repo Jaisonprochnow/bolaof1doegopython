@@ -1,0 +1,15 @@
+{% extends "model-page.html" %}
+{% load bootstrap %}
+{% block content %}
+<div class="container col-4" style="text-align: center;">
+        <h1>Editar</h1>
+            <form method="POST">
+                    {% csrf_token %}
+                    <table>
+                        {{ form|bootstrap }}
+                    </table>
+                <button type="submit" class="btn btn-primary text-monospace">Editar</button>
+            </form>
+            <a href="/lista_gps" class="btn btn-primary my-2 m-2 mb-5 text-monospace">Voltar</a>
+</div>
+{% endblock %}

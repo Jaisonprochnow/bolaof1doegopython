@@ -1,0 +1,50 @@
+{% extends "model-page.html" %}
+{% load bootstrap %}
+{% block content %}
+
+{% if form.errors %}
+{% load static %}
+<div class="container alert alert-danger" role="alert"align="center">
+    <p>Seu nome de usuário e senha não coincidem. Por favor, tente novamente.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Sua conta não tem acesso a esta página. Para prosseguir,
+      faça login com uma conta que tenha acesso.</p>
+    {% endif %}
+  {% endif %}
+</div>
+
+<div class="row">
+    <div align="center"  class="col mt-5">
+      <div class="col-7 text-center border rounded shadow mb-4" style="text-align: center;">
+          <h3 class="container mb-3 mt-3">Iniciar sessão</h3>
+
+        <form method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          <table align="center">
+            <tr>
+              <td>{{ form.username|bootstrap }}</td>
+            </tr>
+            <tr>
+              <td>{{ form.password|bootstrap }}</td>
+            </tr>
+          </table>
+          <input class="btn btn-primary btn-sm mb-3" type="submit" value="LOGIN" />
+          <input type="hidden" name="next" value="/" />
+        </form>
+
+        {# Assumes you setup the password_reset view in your URLconf #}
+        <p><a class="" href="{% url 'password_reset' %}">Esqueceu a senha?</a></p>
+      </div>
+    </div>
+    <div align="center" class="col mt-3 pr-5">
+      <h3>Crie sua conta e comece a apostar agora.</h3>
+      {% load static %}
+      <img style="width: 400px; height: 300px; max-width: 100%" class="mt-2 shadow" src="{% static 'bolao/img/cadastro.jpg' %}" alt="My image">
+      <p class="mt-3"><a href="{% url 'cadastrar_usuario' %}" class="btn btn-primary btn-sm mr-4 ml-2 text-monospace" >CADASTRO</a></p>
+    </div>
+  </div>
+
+{% endblock %}

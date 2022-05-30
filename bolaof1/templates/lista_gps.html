@@ -1,0 +1,52 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+{% if user.is_superuser %}
+<div class="mb-5" style="text-align: center;">
+  <div class="card card-body col-sm-12">
+      <h5 class="card-title">Lista de Gps</h5>
+      {% if piloto|length > 0 %}
+          <p class="card-text">Aqui está a lista de <code>GPs</code> cadastrados.</p>
+
+          <table class="table">
+              <thead class="thead-dark">
+                  <tr>
+                      <th>Pais</th>
+                      <th>Circuito</th>
+                      <th>Data da Corrida</th>
+                      <th>Hora da Corrida</th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+              </thead>
+
+
+              {% for item in piloto %}
+                <tr>
+                  <td>{{ item.pais }}</td>
+                  <td>{{ item.circuito }}</td>
+                  <td>{{ item.data_corrida }}</td>
+                  <td>{{ item.hora_corrida }}</td>
+                  <td>
+                    <a href="editar/{{ item.pais }}" class="btn btn-info">Atualizar</a>
+                    <a href="deletar/{{ item.pais }}" class="btn btn-outline-danger">Excluir</a>
+                  </td>
+                </tr>
+              {% endfor %}
+
+          </table>
+      {% else %}
+          <div class="text-center mt-5 mb-5 jumbotron">
+              <h5>Nenhum <code>Gp</code> cadastrado ainda.</h5>
+          </div>
+      {% endif %}
+  </div>
+</div>
+<div style="text-align: center;">
+<a href="{% url 'cadastro_gp' %}" class="btn btn-primary my-2 m-2 text-monospace" >VOLTAR</a>
+</div>
+{% else %}
+<h3 align="center"> Pagina restrita a administradores.</h3>
+{% endif %}
+{% endblock %}
+
